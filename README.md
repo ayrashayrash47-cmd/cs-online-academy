@@ -123,24 +123,22 @@ starting the server, so the database schema is always up to date on boot.
 2. At [railway.app](https://railway.app), sign up (GitHub sign-in is
    easiest) → **New Project** → **Deploy from GitHub repo** → pick this
    repo. Railway auto-detects it's a Node/Next.js app.
-3. **Add a persistent volume** (Settings → Volumes → New Volume) mounted
-   at `/app/data` — this is where the SQLite database will live across
-   deploys. Without this, every deploy wipes your enrollment data.
-4. **Add a second volume** (or reuse the same one, mounted at a different
-   path) at `/app/public/uploads` — this is where payment screenshots are
-   stored. Same reason: without it, uploaded screenshots vanish on
-   redeploy.
-5. Go to **Variables** and add:
+3. **Add a persistent volume** mounted at `/app/data` — this is where the
+   SQLite database *and* uploaded payment screenshots both live (see
+   `src/lib/paths.ts` — uploads are stored as a sibling of the database
+   file, so one volume covers both). Without this, every deploy wipes
+   your enrollment data and uploaded screenshots.
+4. Go to **Variables** and add:
    - `DATABASE_URL` = `file:/app/data/dev.db`
    - `ADMIN_USERNAME` = `admin` (or your choice)
    - `ADMIN_PASSWORD` = a strong password (**do not reuse the local dev
      password**)
    - `SESSION_SECRET` = a random 64-character hex string — generate with
      `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`
-6. Click **Deploy**. Railway gives you a live URL like
+5. Click **Deploy**. Railway gives you a live URL like
    `https://cs-online-academy-production.up.railway.app` — this is what
    you'd put in ads or share to groups.
-7. Visit `/admin` on that URL and log in with the credentials from step 5
+6. Visit `/admin` on that URL and log in with the credentials from step 4
    to confirm it works, then submit a test enrollment on the live site to
    confirm uploads + database are both persisting after a redeploy.
 

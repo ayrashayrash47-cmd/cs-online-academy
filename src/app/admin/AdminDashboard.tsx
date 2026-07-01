@@ -243,14 +243,14 @@ export function AdminDashboard({
                     </td>
                     <td className="px-4 py-3">
                       <a
-                        href={e.screenshotPath}
+                        href={`/api/uploads/${e.screenshotPath}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="block h-12 w-12 overflow-hidden rounded-lg border border-charcoal/10"
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                          src={e.screenshotPath}
+                          src={`/api/uploads/${e.screenshotPath}`}
                           alt="Payment screenshot"
                           className="h-full w-full object-cover"
                         />

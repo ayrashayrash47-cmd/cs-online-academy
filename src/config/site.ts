@@ -91,8 +91,8 @@ export const siteConfig = {
   upload: {
     maxSizeBytes: 5 * 1024 * 1024, // 5MB
     allowedTypes: ["image/jpeg", "image/png", "image/webp", "image/heic"],
-    dir: "public/uploads",
-    publicPath: "/uploads",
+    // Files are stored alongside the database (see src/lib/paths.ts) and
+    // served through the protected /api/uploads/[filename] route.
   },
 } as const;
 

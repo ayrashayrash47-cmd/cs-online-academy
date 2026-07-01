@@ -4,6 +4,7 @@ import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { db } from "@/lib/db";
 import { siteConfig } from "@/config/site";
+import { uploadsDir } from "@/lib/paths";
 
 export async function POST(request: Request) {
   const formData = await request.formData();
@@ -48,15 +49,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "FILE_TOO_LARGE" }, { status: 400 });
   }
 
-  const uploadDir = path.join(/* turbopackIgnore: true */ process.cwd(), siteConfig.upload.dir);
-  await mkdir(uploadDir, { recursive: true });
+  await mkdir(uploadsDir, { recursive: true });
 
   const ext = path.extname(screenshot.name) || ".jpg";
   const filename = `${Date.now()}-${randomUUID()}${ext}`;
   const bytes = Buffer.from(await screenshot.arrayBuffer());
-  await writeFile(path.join(uploadDir, filename), bytes);
-
-  const screenshotPath = `${siteConfig.upload.publicPath}/${filename}`;
+  await writeFile(path.join(uploadsDir, filename), bytes);
 
   const enrollment = await db.enrollment.create({
     data: {
@@ -67,7 +65,7 @@ export async function POST(request: Request) {
       plan,
       paymentMethod,
       transactionId: transactionId || null,
-      screenshotPath,
+      screenshotPath: filename,
       status: "pending",
     },
   });

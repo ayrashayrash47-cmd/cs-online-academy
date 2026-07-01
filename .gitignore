@@ -43,13 +43,11 @@ next-env.d.ts
 
 /src/generated/prisma
 
-# database (lives at project root — DATABASE_URL is resolved relative to
-# process.cwd(), see src/lib/db.ts)
+# database + uploaded payment screenshots (see src/lib/paths.ts — both live
+# next to each other, resolved from DATABASE_URL, e.g. project root in dev
+# or a mounted volume like /app/data in production)
 /dev.db
 /dev.db-journal
 /dev.db-wal
 /dev.db-shm
-
-# uploaded payment screenshots (local storage v1)
-/public/uploads/*
-!/public/uploads/.gitkeep
+/uploads/

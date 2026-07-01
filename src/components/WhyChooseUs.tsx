@@ -2,6 +2,7 @@
 
 import { Users, Wallet, Award, CalendarClock } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageProvider";
+import { Reveal } from "./Reveal";
 
 const icons = [Users, Wallet, Award, CalendarClock];
 
@@ -22,18 +23,17 @@ export function WhyChooseUs() {
           {t.why.items.map((item, i) => {
             const Icon = icons[i % icons.length];
             return (
-              <div
-                key={item.title}
-                className="group rounded-2xl border border-charcoal/10 bg-cream p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-charcoal text-gold transition-colors group-hover:bg-orange">
-                  <Icon className="h-6 w-6" />
+              <Reveal key={item.title} delay={i * 100}>
+                <div className="group h-full rounded-2xl border border-charcoal/10 bg-cream p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-charcoal text-gold transition-colors group-hover:bg-orange">
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <h3 className="mt-4 text-base font-bold text-charcoal">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-charcoal/70">{item.desc}</p>
                 </div>
-                <h3 className="mt-4 text-base font-bold text-charcoal">
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-sm text-charcoal/70">{item.desc}</p>
-              </div>
+              </Reveal>
             );
           })}
         </div>

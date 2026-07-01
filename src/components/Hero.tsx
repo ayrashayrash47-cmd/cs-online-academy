@@ -1,8 +1,9 @@
 "use client";
 
-import { GraduationCap, MessageCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { whatsappLink } from "@/config/site";
+import { StudyIllustration } from "./StudyIllustration";
 
 export function Hero() {
   const { t } = useLanguage();
@@ -22,7 +23,7 @@ export function Hero() {
       />
 
       <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-2 lg:items-center lg:py-28">
-        <div className="text-center lg:text-start">
+        <div className="animate-[fade-in-up_0.7s_ease-out] text-center lg:text-start">
           <span className="inline-block rounded-full border border-gold/40 bg-gold/10 px-4 py-1 text-xs font-semibold uppercase tracking-wide text-gold-light">
             {t.hero.eyebrow}
           </span>
@@ -65,11 +66,9 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="mx-auto flex justify-center">
-          <div className="relative flex h-64 w-64 items-center justify-center rounded-full border-4 border-gold/60 bg-gradient-to-br from-charcoal-2 to-charcoal shadow-2xl sm:h-80 sm:w-80">
-            <div className="flex h-48 w-48 items-center justify-center rounded-full border-2 border-dashed border-gold/40 sm:h-60 sm:w-60">
-              <GraduationCap className="h-24 w-24 text-gold sm:h-28 sm:w-28" strokeWidth={1.5} />
-            </div>
+        <div className="mx-auto flex animate-[fade-in-up_0.9s_ease-out] justify-center">
+          <div className="relative flex h-72 w-72 items-center justify-center rounded-full border-4 border-gold/60 bg-gradient-to-br from-charcoal-2 to-charcoal shadow-2xl sm:h-96 sm:w-96">
+            <StudyIllustration className="h-56 w-56 sm:h-72 sm:w-72" />
             <span className="absolute -bottom-3 rounded-full bg-orange px-4 py-1 text-xs font-semibold text-white shadow-md">
               Matric / SSC
             </span>

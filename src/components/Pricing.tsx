@@ -3,6 +3,7 @@
 import { Check, Star } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { siteConfig, type PlanId } from "@/config/site";
+import { Reveal } from "./Reveal";
 
 export function Pricing({
   onSelectPlan,
@@ -22,12 +23,12 @@ export function Pricing({
         </div>
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 sm:items-stretch">
-          {siteConfig.pricing.map((tier) => {
+          {siteConfig.pricing.map((tier, i) => {
             const plan = t.pricing.plans[tier.id];
             return (
+              <Reveal key={tier.id} delay={i * 120}>
               <div
-                key={tier.id}
-                className={`relative flex flex-col rounded-3xl border p-7 shadow-sm ${
+                className={`relative flex flex-col rounded-3xl border p-7 shadow-sm transition-transform hover:-translate-y-1 ${
                   tier.highlight
                     ? "border-gold bg-charcoal text-white shadow-xl shadow-gold/10"
                     : "border-charcoal/10 bg-white text-charcoal"
@@ -90,6 +91,7 @@ export function Pricing({
                   {t.pricing.selectPlan}
                 </button>
               </div>
+              </Reveal>
             );
           })}
         </div>

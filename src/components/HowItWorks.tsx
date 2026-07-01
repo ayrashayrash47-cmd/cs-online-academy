@@ -1,6 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/i18n/LanguageProvider";
+import { Reveal } from "./Reveal";
 
 export function HowItWorks() {
   const { t } = useLanguage();
@@ -17,13 +18,15 @@ export function HowItWorks() {
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {t.howItWorks.steps.map((step, i) => (
-            <div key={step.title} className="relative rounded-2xl border border-charcoal/10 bg-cream p-6">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-gold to-orange text-sm font-bold text-charcoal">
-                {i + 1}
-              </span>
-              <h3 className="mt-4 text-base font-bold text-charcoal">{step.title}</h3>
-              <p className="mt-2 text-sm text-charcoal/70">{step.desc}</p>
-            </div>
+            <Reveal key={step.title} delay={i * 100}>
+              <div className="relative rounded-2xl border border-charcoal/10 bg-cream p-6 transition-transform hover:-translate-y-1">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-gold to-orange text-sm font-bold text-charcoal">
+                  {i + 1}
+                </span>
+                <h3 className="mt-4 text-base font-bold text-charcoal">{step.title}</h3>
+                <p className="mt-2 text-sm text-charcoal/70">{step.desc}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>

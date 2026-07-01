@@ -2,6 +2,7 @@
 
 import { Quote } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageProvider";
+import { Reveal } from "./Reveal";
 
 export function Testimonials() {
   const { t } = useLanguage();
@@ -20,23 +21,22 @@ export function Testimonials() {
         </div>
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {t.testimonials.items.map((item) => (
-            <div
-              key={item.name}
-              className="flex flex-col rounded-2xl border border-charcoal/10 bg-cream p-6 shadow-sm"
-            >
-              <Quote className="h-6 w-6 text-gold" />
-              <p className="mt-3 flex-1 text-sm text-charcoal/80">{item.quote}</p>
-              <div className="mt-5 flex items-center gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-charcoal to-charcoal-2 text-sm font-bold text-gold">
-                  {item.name.charAt(0)}
-                </span>
-                <div>
-                  <div className="text-sm font-bold text-charcoal">{item.name}</div>
-                  <div className="text-xs text-charcoal/50">{item.role}</div>
+          {t.testimonials.items.map((item, i) => (
+            <Reveal key={item.name} delay={i * 100}>
+              <div className="flex h-full flex-col rounded-2xl border border-charcoal/10 bg-cream p-6 shadow-sm transition-transform hover:-translate-y-1">
+                <Quote className="h-6 w-6 text-gold" />
+                <p className="mt-3 flex-1 text-sm text-charcoal/80">{item.quote}</p>
+                <div className="mt-5 flex items-center gap-3">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-charcoal to-charcoal-2 text-sm font-bold text-gold">
+                    {item.name.charAt(0)}
+                  </span>
+                  <div>
+                    <div className="text-sm font-bold text-charcoal">{item.name}</div>
+                    <div className="text-xs text-charcoal/50">{item.role}</div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

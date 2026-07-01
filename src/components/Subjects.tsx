@@ -3,6 +3,7 @@
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { siteConfig } from "@/config/site";
 import { SubjectIcon } from "./SubjectIcon";
+import { Reveal } from "./Reveal";
 
 export function Subjects() {
   const { t } = useLanguage();
@@ -16,18 +17,17 @@ export function Subjects() {
         </div>
 
         <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-          {siteConfig.subjects.map((subject) => (
-            <div
-              key={subject.id}
-              className="flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-charcoal-2 p-5 text-center transition-colors hover:border-gold/50"
-            >
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-gold to-orange text-charcoal">
-                <SubjectIcon name={subject.icon} className="h-6 w-6" />
-              </span>
-              <span className="text-sm font-semibold">
-                {t.subjects.items[subject.id]}
-              </span>
-            </div>
+          {siteConfig.subjects.map((subject, i) => (
+            <Reveal key={subject.id} delay={i * 60}>
+              <div className="group flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-charcoal-2 p-5 text-center transition-all hover:-translate-y-1 hover:border-gold/50">
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-gold to-orange text-charcoal transition-transform group-hover:scale-110">
+                  <SubjectIcon name={subject.icon} className="h-6 w-6" />
+                </span>
+                <span className="text-sm font-semibold">
+                  {t.subjects.items[subject.id]}
+                </span>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>

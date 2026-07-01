@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #1c1c1e;
+
+  /* CS Online Academy brand palette — dark grey, orange, gold, white */
+  --brand-charcoal: #1c1c1e;
+  --brand-charcoal-2: #2b2b2f;
+  --brand-orange: #f2711c;
+  --brand-orange-dark: #d95f0d;
+  --brand-gold: #d4af37;
+  --brand-gold-light: #f1d78c;
+  --brand-cream: #fdf8f0;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-charcoal: var(--brand-charcoal);
+  --color-charcoal-2: var(--brand-charcoal-2);
+  --color-orange: var(--brand-orange);
+  --color-orange-dark: var(--brand-orange-dark);
+  --color-gold: var(--brand-gold);
+  --color-gold-light: var(--brand-gold-light);
+  --color-cream: var(--brand-cream);
+  --font-sans: var(--font-body);
+  --font-urdu: var(--font-urdu);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+html[dir="rtl"] body {
+  font-family: var(--font-urdu), "Noto Nastaliq Urdu", serif;
+}
+
+html[dir="rtl"] .force-ltr {
+  direction: ltr;
+}

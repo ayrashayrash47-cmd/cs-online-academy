@@ -109,18 +109,52 @@ change the `datasource` provider in `prisma/schema.prisma`, update
 ## Deployment
 
 This app needs a Node.js server (it uses API routes, file uploads, and a
-SQLite file on disk) — it is **not** a static export. It runs well on
-Railway, Render, or any host that runs `npm run build && npm start`
-persistently. For shared hosting without persistent disk or a Node runtime,
-you'll need to swap file storage for Cloudinary/S3 and the database for a
-hosted Postgres/MySQL instance first.
+SQLite file on disk) — it is **not** a static export, so it can't go on
+Vercel/Netlify as-is (those wipe local disk on every deploy). It runs well
+on Railway, Render, or any host with persistent storage that runs
+`npm run build && npm start`.
+
+`npm start` already runs `prisma migrate deploy` automatically before
+starting the server, so the database schema is always up to date on boot.
+
+### Deploying to Railway (recommended)
+
+1. Push this repo to GitHub (see below).
+2. At [railway.app](https://railway.app), sign up (GitHub sign-in is
+   easiest) → **New Project** → **Deploy from GitHub repo** → pick this
+   repo. Railway auto-detects it's a Node/Next.js app.
+3. **Add a persistent volume** (Settings → Volumes → New Volume) mounted
+   at `/app/data` — this is where the SQLite database will live across
+   deploys. Without this, every deploy wipes your enrollment data.
+4. **Add a second volume** (or reuse the same one, mounted at a different
+   path) at `/app/public/uploads` — this is where payment screenshots are
+   stored. Same reason: without it, uploaded screenshots vanish on
+   redeploy.
+5. Go to **Variables** and add:
+   - `DATABASE_URL` = `file:/app/data/dev.db`
+   - `ADMIN_USERNAME` = `admin` (or your choice)
+   - `ADMIN_PASSWORD` = a strong password (**do not reuse the local dev
+     password**)
+   - `SESSION_SECRET` = a random 64-character hex string — generate with
+     `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`
+6. Click **Deploy**. Railway gives you a live URL like
+   `https://cs-online-academy-production.up.railway.app` — this is what
+   you'd put in ads or share to groups.
+7. Visit `/admin` on that URL and log in with the credentials from step 5
+   to confirm it works, then submit a test enrollment on the live site to
+   confirm uploads + database are both persisting after a redeploy.
+
+Later, if you buy a domain, add it under **Settings → Networking → Custom
+Domain** and point your domain's DNS at the CNAME Railway gives you — no
+code changes needed.
+
+### Pushing this repo to GitHub
 
 ```bash
-npm run build
-npm start
+git remote add origin https://github.com/<your-username>/<repo-name>.git
+git branch -M main
+git push -u origin main
 ```
 
-Remember to set the same environment variables (`DATABASE_URL`,
-`ADMIN_USERNAME`, `ADMIN_PASSWORD`, `SESSION_SECRET`) on your host, and to
-run `npx prisma migrate deploy` against the production database before
-first boot.
+(Create the empty repo on GitHub first via the "New repository" button —
+don't initialize it with a README, since this repo already has one.)

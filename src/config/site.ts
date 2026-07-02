@@ -15,6 +15,23 @@ export const siteConfig = {
   shortName: "CS Academy",
   poweredBy: "CS School System",
 
+  // Used for SEO (canonical URL, sitemap, Open Graph). Update this the day
+  // you point a custom domain at the site — nothing else needs to change.
+  siteUrl: "https://cs-online-academy-production.up.railway.app",
+
+  seoDescription:
+    "Live online tutoring for Grade 9 & 10 Matric/SSC students in Pakistan. Affordable plans from Rs. 1,000/month, EasyPaisa payments, flexible scheduling with experienced teachers.",
+  seoKeywords: [
+    "online tuition Pakistan",
+    "matric online classes",
+    "SSC online tuition",
+    "grade 9 online classes",
+    "grade 10 online classes",
+    "online math tuition Pakistan",
+    "CS School System",
+    "EasyPaisa tuition fee",
+  ],
+
   contact: {
     displayPhone: "+92-340-6839806",
     // wa.me links need the number with country code, no spaces, no leading 0.

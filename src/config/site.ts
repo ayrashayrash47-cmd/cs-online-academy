@@ -20,7 +20,7 @@ export const siteConfig = {
   siteUrl: "https://cs-online-academy-production.up.railway.app",
 
   seoDescription:
-    "Live online tutoring for Grade 9 & 10 Matric/SSC students in Pakistan. Affordable plans from Rs. 1,000/month, EasyPaisa payments, flexible scheduling with experienced teachers.",
+    "Live online tutoring for Grade 9 & 10 Matric/SSC students in Pakistan, focused on board exam and result preparation. Affordable plans from Rs. 1,000/month, EasyPaisa payments, flexible scheduling with experienced teachers.",
   seoKeywords: [
     "online tuition Pakistan",
     "matric online classes",
@@ -28,6 +28,8 @@ export const siteConfig = {
     "grade 9 online classes",
     "grade 10 online classes",
     "online math tuition Pakistan",
+    "matric result preparation",
+    "board exam preparation Pakistan",
     "CS School System",
     "EasyPaisa tuition fee",
   ],

@@ -43,7 +43,7 @@ const en = {
       },
       {
         title: "Experienced Matric Teachers",
-        desc: "Learn from teachers who know the Matric syllabus inside out and focus on exam-relevant preparation.",
+        desc: "Learn from teachers who know the Matric syllabus inside out and focus on board exam and result preparation.",
       },
       {
         title: "Flexible Daily Scheduling",
@@ -217,6 +217,10 @@ const en = {
       {
         q: "How soon after I submit will I hear back?",
         a: "We verify payments and reply on WhatsApp within 24 hours — usually much sooner.",
+      },
+      {
+        q: "Do you help with board exam and result preparation, or just regular homework help?",
+        a: "Board exam and result preparation is the main focus — classes are built around the Matric syllabus and exam-relevant practice, not just finishing homework.",
       },
     ],
   },
